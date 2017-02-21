@@ -84,3 +84,6 @@ int authenticate_gss_server_clean(
 int authenticate_gss_server_step(
     gss_server_state *state, const char *challenge
 );
+krb5_principal get_keytab_entry_principal(
+	krb5_keytab_entry* keytab_entry
+);

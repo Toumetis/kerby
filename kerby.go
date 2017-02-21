@@ -150,7 +150,10 @@ func ServerPrincipalDetails(service, hostname string) (string, error) {
 			break
 		}
 
-		code = C.krb5_unparse_name(kcontext, entry.principal, &pname)
+		// Don't need to defer C.free on this as the pointer is owned by the keytab entry
+		principal := C.get_keytab_entry_principal(&entry)
+		
+		code = C.krb5_unparse_name(kcontext, principal, &pname)
 		if code != 0 {
 			return "", fmt.Errorf("Cannot parse principal name from keytab: %d", int(code))
 		}

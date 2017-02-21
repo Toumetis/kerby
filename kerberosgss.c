@@ -459,3 +459,7 @@ void get_gss_error(OM_uint32 err_maj, char *buf_maj, OM_uint32 err_min, char *bu
     } while (!GSS_ERROR(maj_stat) && msg_ctx != 0);
 }
 
+krb5_principal get_keytab_entry_principal(krb5_keytab_entry* keytab_entry)
+{
+	return keytab_entry->principal;
+}
